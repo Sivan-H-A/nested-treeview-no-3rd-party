@@ -1,0 +1,27 @@
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    <!-- This is the tree node template for leaf nodes -->
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+       <!--use a disabled button to provide padding for tree leaf -->
+      <button mat-icon-button disabled ></button>
+      {{node.name}} : {{node.value}}
+    </mat-tree-node>
+    <!-- This is the tree node template for expandable nodes -->
+    <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+      <button class="expand-btn" mat-icon-button matTreeNodeToggle
+              [attr.aria-label]="'Toggle ' + node.name" >
+        <mat-icon class="mat-icon-rtl-mirror">
+          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+      </button>
+      {{node.name}}    
+    </mat-tree-node>
+  </mat-tree> 
+
+<!--older option recursive component but problem to do collapse-->
+  <!-- <ul *ngFor = "let list of jsonFile | keyvalue; let i=index">
+    <li>
+        <span>{{list.key}}: </span>
+        <span *ngIf = "isObject(list.value) === false" style="padding-left: 10px;">{{list.value}}</span>
+        <app-tree-view [jsonFile]="list.value"></app-tree-view>
+    </li>
+</ul> -->

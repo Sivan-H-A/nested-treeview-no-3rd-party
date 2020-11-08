@@ -1,0 +1,40 @@
+
+  <div id="wrap" class="input">
+    <header class="input-header">
+      <h1>Generate Tree View</h1>
+    </header>
+    
+    <section  class="input-content">
+        <h2>Please enter a desired URL</h2>
+        <div class="input-content-wrap">
+            <div class="inputbox">
+                <div class="inputbox-content">
+                    <input type='url' class="formInput" (keyup.enter)="renderURL()" 
+                    placeholder="URL" [(ngModel)]='urlPath' name="urlPath" required 
+                    (change)="refreshView()"/>
+                    <span class="underline"></span>
+                </div>
+            </div> 
+            <button class="btn" [disabled]="!urlPath" (click) ="renderURL()" >Render URL</button>
+        </div>
+    </section>
+    <div [ngSwitch]="viewState">
+        <div *ngSwitchCase="viewStateTypes.Loading" class="loading-spinner-container" >
+            <div class="loading-spinner-with-text">
+                <mat-spinner></mat-spinner>  
+                <div class="spinner-inner-text">
+                    Loading
+                </div>
+            </div>
+        </div>
+        <div *ngSwitchCase="viewStateTypes.Completed" style="padding:0px 55px">
+            <div class="input-content-wrap">
+                <app-tree-view [jsonFile] = jsonFile></app-tree-view>
+            </div>
+        </div>
+        <div *ngSwitchCase="viewStateTypes.Failed" class="input-content">
+            <h2>{{this.msg}}</h2>
+        </div>
+    </div>
+
+ </div>
