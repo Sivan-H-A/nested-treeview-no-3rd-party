@@ -28,9 +28,9 @@
             </div>
         </div>
         <div *ngSwitchCase="viewStateTypes.Completed" class="input-content">
-            <div class="input-content-wrap">
-                <app-tree-view [jsonFile] = jsonFile></app-tree-view>
-            </div>
+            
+                <app-tree-view [dataSource] = dataSource></app-tree-view>
+            
         </div>
         <div *ngSwitchCase="viewStateTypes.Failed" class="input-content">
             <h2>{{this.msg}}</h2>
